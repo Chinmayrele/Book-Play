@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:book_play/provider/category_provider.dart';
 import 'package:book_play/provider/search_provider.dart';
+import 'package:book_play/screens/category_page.dart';
 import 'package:book_play/widgets/book_list_design.dart';
 import 'package:book_play/widgets/search_list_design.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late BookProvider bookProvider;
   late SearchProvider searchProvider;
+  late CategoryProvider categoryProvider;
   List<Book> bookVolumeList = [];
   List<Book> searchBooksList = [];
   bool isLoading = true;
@@ -29,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     bookProvider = Provider.of<BookProvider>(context, listen: false);
     searchProvider = Provider.of<SearchProvider>(context, listen: false);
+    categoryProvider = Provider.of<CategoryProvider>(context, listen: false);
     bookProvider.firstFetchBookVolumeData().then((value) {
       bookVolumeList = (bookProvider.bookVolumeListData);
       setState(() {
@@ -83,9 +87,7 @@ class _HomePageState extends State<HomePage> {
                       controller: searchController,
                       style:
                           const TextStyle(color: Colors.black54, fontSize: 16),
-                      // controller: _mySearched,
                       cursorHeight: 22,
-                      // autofocus: true,
                       cursorColor: Colors.grey,
                       decoration: InputDecoration(
                         errorBorder: OutlineInputBorder(
@@ -180,11 +182,46 @@ class _HomePageState extends State<HomePage> {
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: [
-                                  categoryOptions("Genres", () {}),
-                                  categoryOptions("Top Selling", () {}),
-                                  categoryOptions("New Releases", () {}),
-                                  categoryOptions("Romance", () {}),
-                                  categoryOptions("Comics", () {}),
+                                  categoryOptions("Sci-fi", () async {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                const CategoryPage(
+                                                  category: "Sci-Fi",
+                                                ))));
+                                  }),
+                                  categoryOptions("Fantasy", () async {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                const CategoryPage(
+                                                  category: "Fantasy",
+                                                ))));
+                                  }),
+                                  categoryOptions("Computer", () async {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                const CategoryPage(
+                                                  category: "Computer",
+                                                ))));
+                                  }),
+                                  categoryOptions("Romance", () async {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                const CategoryPage(
+                                                  category: "Romance",
+                                                ))));
+                                  }),
+                                  categoryOptions("Anime", () async {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                const CategoryPage(
+                                                  category: "Anime",
+                                                ))));
+                                  }),
                                 ],
                               ),
                             ),
@@ -249,7 +286,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget categoryOptions(String text, Function function) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        function();
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
         margin: const EdgeInsets.only(left: 10, right: 10, top: 10),

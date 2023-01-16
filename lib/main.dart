@@ -1,6 +1,6 @@
 import 'package:book_play/provider/book_provider.dart';
+import 'package:book_play/provider/category_provider.dart';
 import 'package:book_play/provider/search_provider.dart';
-import 'package:book_play/screens/home_page.dart';
 import 'package:book_play/screens/index_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => BookProvider()),
-        ChangeNotifierProvider(create: ((context) => SearchProvider()))
+        ChangeNotifierProvider(create: ((context) => SearchProvider())),
+        ChangeNotifierProvider(create: ((context) => CategoryProvider()))
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -29,7 +30,6 @@ class MyApp extends StatelessWidget {
         ),
         home: const IndexPage(),
       ),
-      // ),
     );
   }
 }
