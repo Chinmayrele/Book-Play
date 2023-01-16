@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -7,11 +6,25 @@ import '../models/book.dart';
 
 class BookProvider with ChangeNotifier {
   final List<Book> _bookVolumeListDatas = [];
+  final List<Book> _bookmarkedListDatas = [];
+  final List<Book> _likedBookList = [];
   bool hasNextPage = true;
   bool isLoading = false;
 
   List<Book> get bookVolumeListData {
     return [..._bookVolumeListDatas];
+  }
+
+  List<Book> get bookVolumeShuffleListData {
+    return [..._bookVolumeListDatas..shuffle()];
+  }
+
+  List<Book> get bookmarkedListData {
+    return [..._bookmarkedListDatas];
+  }
+
+  List<Book> get likedBookList {
+    return [..._likedBookList];
   }
 
   static const String apiKey = "AIzaSyCUGKh9BEdskSpB0cDIkmOtLNZZmx7liXo";
@@ -36,8 +49,8 @@ class BookProvider with ChangeNotifier {
               subtitle: book['volumeInfo']['subtitle'] ?? "",
               authors: book['volumeInfo']['authors'] ?? [],
               description: book['volumeInfo']['description'] ?? "",
-              previewLink: book['volumeInfo']['previewLink'] ?? "",
-              infoLink: book['volumeInfo']['infoLink'] ?? "",
+              previewLink: book['volumeInfo']['infoLink'] ?? "",
+              infoLink: book['volumeInfo'][''] ?? "canonicalVolumeLink",
               imageLinks: book['volumeInfo']['imageLinks'] ?? {},
               accessInfo: book['accessInfo'] ?? {},
               avgRating: book['volumeInfo']['averageRating'] != null
@@ -83,7 +96,7 @@ class BookProvider with ChangeNotifier {
               avgRating: book['volumeInfo']['averageRating'] != null
                   ? (book['volumeInfo']['averageRating']).toDouble()
                   : 0.0,
-              pageCount: book['volumeInfo']['pageCount'] ?? 0));
+              pageCount: book['volumeInfo']['pageCount'] ?? 100));
         }
         _bookVolumeListDatas.addAll(bookData);
         isLoading = false;
@@ -98,5 +111,25 @@ class BookProvider with ChangeNotifier {
       hasNextPage = false;
       debugPrint("ERROR IN THE API MORE DATA OCCURING");
     }
+  }
+
+  void addToBookmarkedList(Book book) {
+    _bookmarkedListDatas.add(book);
+    notifyListeners();
+  }
+
+  void removeFromBookmarkedList(Book book) {
+    _bookmarkedListDatas.remove(book);
+    notifyListeners();
+  }
+
+  void likedBookListFunction(Book book) {
+    _likedBookList.add(book);
+    notifyListeners();
+  }
+
+  void notLikedBookListFunction(Book book) {
+    _likedBookList.remove(book);
+    notifyListeners();
   }
 }

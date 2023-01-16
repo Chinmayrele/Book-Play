@@ -1,5 +1,7 @@
 import 'package:book_play/provider/book_provider.dart';
+import 'package:book_play/provider/search_provider.dart';
 import 'package:book_play/screens/home_page.dart';
+import 'package:book_play/screens/index_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,15 +15,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => BookProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => BookProvider()),
+        ChangeNotifierProvider(create: ((context) => SearchProvider()))
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          backgroundColor: const Color(0xFFe1f1ff),
           primarySwatch: Colors.blue,
         ),
-        home: const HomePage(),
+        home: const IndexPage(),
       ),
+      // ),
     );
   }
 }
