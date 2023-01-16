@@ -73,178 +73,175 @@ class _HomePageState extends State<HomePage> {
           : Container(
               padding: const EdgeInsets.only(left: 15, bottom: 15, top: 20),
               width: size.width * 0.95,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: size.height * 0.05,
-                    ),
-                    TextFormField(
-                        controller: searchController,
-                        style: const TextStyle(
-                            color: Colors.black54, fontSize: 16),
-                        // controller: _mySearched,
-                        cursorHeight: 22,
-                        // autofocus: true,
-                        cursorColor: Colors.grey,
-                        decoration: InputDecoration(
-                          errorBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey[400]!, width: 1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey[400]!, width: 1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey[400]!, width: 1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey[400]!, width: 1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          contentPadding: const EdgeInsets.all(15),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          hintText: 'Search Play Books',
-                          hintStyle: const TextStyle(
-                              color: Colors.grey, fontSize: 15, wordSpacing: 2),
-                          fillColor: Colors.grey[150],
-                          filled: true,
-                          prefixIcon:
-                              const Icon(Icons.search, color: Colors.grey),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                searchController.clear();
-                                searchBooksList.clear();
-                              });
-                            },
-                            child: const Icon(Icons.clear_rounded,
-                                color: Colors.grey),
-                          ),
+              child: ListView(
+                controller: scrollController,
+                children: [
+                  // SizedBox(
+                  //   height: size.height * 0.05,
+                  // ),
+                  TextFormField(
+                      controller: searchController,
+                      style:
+                          const TextStyle(color: Colors.black54, fontSize: 16),
+                      // controller: _mySearched,
+                      cursorHeight: 22,
+                      // autofocus: true,
+                      cursorColor: Colors.grey,
+                      decoration: InputDecoration(
+                        errorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey[400]!, width: 1),
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return 'Please Enter Book Name';
-                          }
-                          return null;
-                        },
-                        onChanged: searchBooks),
-                    searchBooksList.isNotEmpty
-                        ? SizedBox(
-                            height: size.height * 0.88,
-                            child: ListView.builder(
-                              itemBuilder: ((context, index) {
-                                return SearchListDesign(
-                                  searchBook: searchBooksList[index],
-                                );
-                              }),
-                              itemCount: searchBooksList.length,
-                            ))
-                        : Column(
-                            children: [
-                              SizedBox(
-                                height: size.height * 0.1,
-                              ),
-                              Center(
-                                child: textString("Let's find your next read",
-                                    Colors.black, 20),
-                              ),
-                              const SizedBox(height: 15),
-                              Center(
-                                child: SizedBox(
-                                  width: size.width * 0.8,
-                                  child: const Text(
-                                    "From romance to superheros to Thai cuisine, we have tons of books for all your interests",
-                                    style: TextStyle(color: Colors.grey),
-                                    textAlign: TextAlign.center,
-                                  ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey[400]!, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey[400]!, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey[400]!, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        contentPadding: const EdgeInsets.all(15),
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        hintText: 'Search Play Books',
+                        hintStyle: const TextStyle(
+                            color: Colors.grey, fontSize: 15, wordSpacing: 2),
+                        fillColor: Colors.grey[150],
+                        filled: true,
+                        prefixIcon:
+                            const Icon(Icons.search, color: Colors.grey),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              searchController.clear();
+                              searchBooksList.clear();
+                            });
+                          },
+                          child: const Icon(Icons.clear_rounded,
+                              color: Colors.grey),
+                        ),
+                      ),
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return 'Please Enter Book Name';
+                        }
+                        return null;
+                      },
+                      onChanged: searchBooks),
+                  searchBooksList.isNotEmpty
+                      ? SizedBox(
+                          height: size.height * 0.88,
+                          child: ListView.builder(
+                            itemBuilder: ((context, index) {
+                              return SearchListDesign(
+                                searchBook: searchBooksList[index],
+                              );
+                            }),
+                            itemCount: searchBooksList.length,
+                          ))
+                      : Column(
+                          children: [
+                            SizedBox(
+                              height: size.height * 0.1,
+                            ),
+                            Center(
+                              child: textString("Let's find your next read",
+                                  Colors.black, 20),
+                            ),
+                            const SizedBox(height: 15),
+                            Center(
+                              child: SizedBox(
+                                width: size.width * 0.8,
+                                child: const Text(
+                                  "From romance to superheros to Thai cuisine, we have tons of books for all your interests",
+                                  style: TextStyle(color: Colors.grey),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
-                              SizedBox(
-                                height: size.height * 0.1,
+                            ),
+                            SizedBox(
+                              height: size.height * 0.1,
+                            ),
+                            dividerFunction(),
+                            Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 10),
+                                child: textString(
+                                    "Explore Play Books", Colors.black, 20)),
+                            SizedBox(
+                              height: 70,
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  categoryOptions("Genres", () {}),
+                                  categoryOptions("Top Selling", () {}),
+                                  categoryOptions("New Releases", () {}),
+                                  categoryOptions("Romance", () {}),
+                                  categoryOptions("Comics", () {}),
+                                ],
                               ),
-                              dividerFunction(),
-                              Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 10, top: 10),
-                                  child: textString(
-                                      "Explore Play Books", Colors.black, 20)),
-                              SizedBox(
-                                height: 70,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    categoryOptions("Genres", () {}),
-                                    categoryOptions("Top Selling", () {}),
-                                    categoryOptions("New Releases", () {}),
-                                    categoryOptions("Romance", () {}),
-                                    categoryOptions("Comics", () {}),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 15),
-                              dividerFunction(),
-                              Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 10, top: 10),
-                                  child: textString(
-                                      "Check out the Books", Colors.black, 20)),
-                              Consumer<BookProvider>(
-                                  builder: ((context, value, child) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(top: 30),
-                                  child: Expanded(
-                                      child: GridView.builder(
-                                    padding: const EdgeInsets.only(top: 0),
-                                    controller: scrollController,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            childAspectRatio: 0.66,
-                                            crossAxisSpacing: 2,
-                                            mainAxisSpacing: 2),
-                                    itemBuilder: ((context, i) {
-                                      if (i <
-                                          value.bookVolumeListData.length - 1) {
-                                        return BookListDesign(
-                                          size: size,
-                                          bookDetail:
-                                              value.bookVolumeListData[i],
-                                        );
-                                      } else {
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 45),
-                                          child: Center(
-                                            child: bookProvider.hasNextPage
-                                                ? const Center(
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color: Colors.black,
-                                                    ),
-                                                  )
-                                                : const Text(
-                                                    "No More Data to Load!"),
-                                          ),
-                                        );
-                                      }
-                                    }),
-                                    shrinkWrap: true,
-                                    itemCount: value.bookVolumeListData.length,
-                                  )),
-                                );
-                              }))
-                            ],
-                          ),
-                  ],
-                ),
+                            ),
+                            const SizedBox(height: 15),
+                            dividerFunction(),
+                            Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 10),
+                                child: textString(
+                                    "Check out the Books", Colors.black, 20)),
+                            Consumer<BookProvider>(
+                                builder: ((context, value, child) {
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 30),
+                                child: Expanded(
+                                    child: GridView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  padding: const EdgeInsets.only(top: 0),
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          childAspectRatio: 0.66,
+                                          crossAxisSpacing: 2,
+                                          mainAxisSpacing: 2),
+                                  itemBuilder: ((context, i) {
+                                    if (i <
+                                        value.bookVolumeListData.length - 1) {
+                                      return BookListDesign(
+                                        size: size,
+                                        bookDetail: value.bookVolumeListData[i],
+                                      );
+                                    } else {
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 45),
+                                        child: Center(
+                                          child: bookProvider.hasNextPage
+                                              ? const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: Colors.black,
+                                                  ),
+                                                )
+                                              : const Text(
+                                                  "No More Data to Load!"),
+                                        ),
+                                      );
+                                    }
+                                  }),
+                                  shrinkWrap: true,
+                                  itemCount: value.bookVolumeListData.length,
+                                )),
+                              );
+                            }))
+                          ],
+                        ),
+                ],
               ),
             ),
     );
