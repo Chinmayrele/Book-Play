@@ -37,6 +37,7 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+        backgroundColor: Color(0xFFe1f1ff),
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {

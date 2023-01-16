@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => CategoryProvider()))
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Book Play',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           backgroundColor: const Color(0xFFe1f1ff),

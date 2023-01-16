@@ -9,6 +9,8 @@ class SearchProvider with ChangeNotifier {
 
   static const String apiKey = "AIzaSyCUGKh9BEdskSpB0cDIkmOtLNZZmx7liXo";
 
+  // ------------------------------
+  // FETCHING OF THE BOOK SEARCHED BY USER
   Future<List<Book>> searchBook(String query) async {
     String apiUrl =
         "https://www.googleapis.com/books/v1/volumes?q=$query&key=$apiKey";

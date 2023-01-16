@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 class CategoryProvider with ChangeNotifier {
   static const String apiKey = "AIzaSyCUGKh9BEdskSpB0cDIkmOtLNZZmx7liXo";
 
+  // -------------------------------
+  // FETCHING OF THE BOOK BASED ON THE CATEGORY
   Future<List<Book>> categoryBookListData(String category) async {
     String apiUrl =
         "https://www.googleapis.com/books/v1/volumes?q=$category&key=$apiKey";

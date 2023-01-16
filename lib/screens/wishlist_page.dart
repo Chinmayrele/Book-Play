@@ -19,6 +19,8 @@ class WishlistPage extends StatelessWidget {
         child: Column(children: [
           const SizedBox(height: 30),
           Consumer<BookProvider>(builder: ((context, bookProvider, child) {
+            // --------------------------------
+            // GRID OF THE BOOKS WISHLISTED BY THE USERS
             return SizedBox(
               height: size.height * 0.88,
               child: bookProvider.bookmarkedListData.isEmpty

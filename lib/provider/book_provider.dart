@@ -5,12 +5,16 @@ import 'package:http/http.dart' as http;
 import '../models/book.dart';
 
 class BookProvider with ChangeNotifier {
+  // -----------------------------
+  // VARIABLE DECLARATION
   final List<Book> _bookVolumeListDatas = [];
   final List<Book> _bookmarkedListDatas = [];
   final List<Book> _likedBookList = [];
   bool hasNextPage = true;
   bool isLoading = false;
 
+  // -------------------------------
+  // GETTERS OF THE VARIABLES
   List<Book> get bookVolumeListData {
     return [..._bookVolumeListDatas];
   }
@@ -30,6 +34,8 @@ class BookProvider with ChangeNotifier {
   static const String apiKey = "AIzaSyCUGKh9BEdskSpB0cDIkmOtLNZZmx7liXo";
   int page = 1;
 
+  // ---------------------------
+  // FETCHING OF THE BOOKS FROM THE BOOK API
   Future<void> firstFetchBookVolumeData() async {
     String apiUrl =
         "https://www.googleapis.com/books/v1/volumes?q=$page&key=$apiKey";
@@ -68,6 +74,8 @@ class BookProvider with ChangeNotifier {
     }
   }
 
+  // ----------------------------------
+  // FETCHING MORE DATA FOR PAGINATION
   Future<void> fetchMoreBookVolumeData() async {
     page += 1;
     String apiUrl =
@@ -113,6 +121,8 @@ class BookProvider with ChangeNotifier {
     }
   }
 
+  // ---------------------------
+  // ADDING & REMOVING OF THE BOOKMARKED BOOK
   void addToBookmarkedList(Book book) {
     _bookmarkedListDatas.add(book);
     notifyListeners();
@@ -123,6 +133,8 @@ class BookProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // ---------------------------
+  // ADDING & REMOVING OF THE LIKED BOOK
   void likedBookListFunction(Book book) {
     _likedBookList.add(book);
     notifyListeners();

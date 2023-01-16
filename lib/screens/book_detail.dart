@@ -60,6 +60,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
           actions: [
             IconButton(
                 onPressed: () {
+                  // ------------------------
+                  // LOGIC OF WHETHER PERSON HAS LIKED THE BOOK OR NOT
                   snackBar(!likedBook
                       ? "You have liked the book"
                       : "Removed from like book list");
@@ -80,6 +82,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   color: Colors.black,
                 )),
             IconButton(
+                // ------------------------
+                // LOGIC OF WHETHER PERSON HAS BOOKMARKED THE BOOK OR NOT
                 onPressed: () {
                   snackBar(!bookMarked
                       ? "This Book is BookMarked"
@@ -100,6 +104,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       : Icons.bookmark_border_rounded,
                   color: Colors.black,
                 )),
+            // -----------------------------
+            // DROPDOWN BUTTON OF SHARE OPTION
             DropdownButtonHideUnderline(
               child: DropdownButton2(
                 customButton: const Icon(
@@ -120,7 +126,9 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     .toList(),
                 value: selectedValue,
                 onChanged: (value) {
-                  Share.share("This is an Amazing Book!");
+                  // SHARING THE INFO-LINK OF THE BOOK
+                  Share.share(
+                      "This is an Amazing Book! Why don't you try it!!!\n${widget.bookDetail.infoLink}");
                 },
                 buttonHeight: 40,
                 buttonWidth: 140,
@@ -164,7 +172,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        // height: 50,
                         width: 150,
                         child: Text(
                           widget.bookDetail.title,
@@ -226,14 +233,12 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       )
                     ],
                   ),
-                  // const SizedBox(width: 20),
                   Container(
                     height: 35,
                     width: 1.5,
                     margin: const EdgeInsets.only(left: 20, right: 20),
                     decoration: const BoxDecoration(color: Colors.grey),
                   ),
-                  // const SizedBox(width: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
@@ -248,14 +253,12 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       )
                     ],
                   ),
-                  // const SizedBox(width: 20),
                   Container(
                     height: 35,
                     width: 1.5,
                     margin: const EdgeInsets.only(left: 20, right: 20),
                     decoration: const BoxDecoration(color: Colors.grey),
                   ),
-                  // const SizedBox(width: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -273,6 +276,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
                 ],
               ),
               const SizedBox(height: 25),
+              // --------------------------------
+              // BUTTON TO LAUNCH THE URL TO WEB PAGE FOR PREVIEW LINK & MORE INFO
               Row(
                 children: [
                   SizedBox(
@@ -362,6 +367,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     fontSize: 17),
               ),
               const SizedBox(height: 20),
+              // --------------------------------
+              // SHOWING MORE SIMILIAR BOOKS TO THE BOOKS VIEWED
               SizedBox(
                 height: size.height * 0.3,
                 child: ListView.builder(

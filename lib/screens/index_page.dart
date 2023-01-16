@@ -16,10 +16,11 @@ class _IndexPageState extends State<IndexPage> {
     const HomePage(),
     const WishlistPage(),
     const FavouritePage(),
-    // const WishlistPage(),
   ];
   @override
   Widget build(BuildContext context) {
+    // -------------------------------
+    // BOTTOM NAVIGATION PAGE
     return Scaffold(
       body: IndexedStack(index: pageIndex, children: screens),
       bottomNavigationBar: NavigationBarTheme(

@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // PROVIDERS DECLARATION
   late BookProvider bookProvider;
   late SearchProvider searchProvider;
   late CategoryProvider categoryProvider;
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   Timer? debouncer;
   TextEditingController searchController = TextEditingController();
   late ScrollController scrollController;
+
   @override
   void initState() {
     bookProvider = Provider.of<BookProvider>(context, listen: false);
@@ -80,9 +82,7 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 controller: scrollController,
                 children: [
-                  // SizedBox(
-                  //   height: size.height * 0.05,
-                  // ),
+                  // API-SEARCH TEXT FIELD
                   TextFormField(
                       controller: searchController,
                       style:
@@ -177,6 +177,8 @@ class _HomePageState extends State<HomePage> {
                                     const EdgeInsets.only(left: 10, top: 10),
                                 child: textString(
                                     "Explore Play Books", Colors.black, 20)),
+                            // -------------------------
+                            // CATEGORY BOOK LIST VIEW
                             SizedBox(
                               height: 70,
                               child: ListView(
@@ -232,6 +234,8 @@ class _HomePageState extends State<HomePage> {
                                     const EdgeInsets.only(left: 10, top: 10),
                                 child: textString(
                                     "Check out the Books", Colors.black, 20)),
+                            // ------------------------------
+                            // API FETCHED BOOK LIST WITH PAGINATION
                             Consumer<BookProvider>(
                                 builder: ((context, value, child) {
                               return Padding(
