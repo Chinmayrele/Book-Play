@@ -240,44 +240,43 @@ class _HomePageState extends State<HomePage> {
                                 builder: ((context, value, child) {
                               return Padding(
                                 padding: const EdgeInsets.only(top: 30),
-                                child: Expanded(
-                                    child: GridView.builder(
+                                child: GridView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   padding: const EdgeInsets.only(top: 0),
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          childAspectRatio: 0.66,
-                                          crossAxisSpacing: 2,
-                                          mainAxisSpacing: 2),
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 0.66,
+                                      crossAxisSpacing: 2,
+                                      mainAxisSpacing: 2),
                                   itemBuilder: ((context, i) {
-                                    if (i <
-                                        value.bookVolumeListData.length - 1) {
-                                      return BookListDesign(
-                                        size: size,
-                                        bookDetail: value.bookVolumeListData[i],
-                                      );
-                                    } else {
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 45),
-                                        child: Center(
-                                          child: bookProvider.hasNextPage
-                                              ? const Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    color: Colors.black,
-                                                  ),
-                                                )
-                                              : const Text(
-                                                  "No More Data to Load!"),
-                                        ),
-                                      );
-                                    }
+                                if (i <
+                                    value.bookVolumeListData.length - 1) {
+                                  return BookListDesign(
+                                    size: size,
+                                    bookDetail: value.bookVolumeListData[i],
+                                  );
+                                } else {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 45),
+                                    child: Center(
+                                      child: bookProvider.hasNextPage
+                                          ? const Center(
+                                              child:
+                                                  CircularProgressIndicator(
+                                                color: Colors.black,
+                                              ),
+                                            )
+                                          : const Text(
+                                              "No More Data to Load!"),
+                                    ),
+                                  );
+                                }
                                   }),
                                   shrinkWrap: true,
                                   itemCount: value.bookVolumeListData.length,
-                                )),
+                                ),
                               );
                             }))
                           ],

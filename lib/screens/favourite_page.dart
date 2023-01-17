@@ -20,55 +20,52 @@ class FavouritePage extends StatelessWidget {
         child: Column(children: [
           const SizedBox(height: 30),
           Consumer<BookProvider>(builder: ((context, bookProvider, child) {
-            return SizedBox(
-              height: size.height * 0.88,
-              child: bookProvider.likedBookList.isEmpty
-                  ? Center(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.thumbs_up_down_rounded,
-                              color: Colors.blue[200],
-                              size: 60,
+            return bookProvider.likedBookList.isEmpty
+                ? Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.thumbs_up_down_rounded,
+                            color: Colors.blue[200],
+                            size: 60,
+                          ),
+                          SizedBox(
+                            width: size.width * 0.85,
+                            child: const Text(
+                              "Liked a book, then keep a tab",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 19),
+                              textAlign: TextAlign.center,
                             ),
-                            SizedBox(
-                              width: size.width * 0.85,
-                              child: const Text(
-                                "Liked a book, then keep a tab",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 19),
-                                textAlign: TextAlign.center,
-                              ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.85,
+                            child: const Text(
+                              "To like a book, tap on thumb's up icon in book's details",
+                              style: TextStyle(color: Colors.grey),
+                              textAlign: TextAlign.center,
                             ),
-                            SizedBox(
-                              width: size.width * 0.85,
-                              child: const Text(
-                                "To like a book, tap on thumb's up icon in book's details",
-                                style: TextStyle(color: Colors.grey),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          ]),
-                    )
-                  : GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 0.68,
-                              crossAxisSpacing: 2,
-                              mainAxisSpacing: 2),
-                      itemBuilder: ((context, index) {
-                        return BookListDesign(
-                            bookDetail: bookProvider.likedBookList[index],
-                            size: size);
-                      }),
-                      // shrinkWrap: true,
-                      itemCount: bookProvider.likedBookList.length,
-                    ),
-            );
+                          )
+                        ]),
+                  )
+                : GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.68,
+                            crossAxisSpacing: 2,
+                            mainAxisSpacing: 2),
+                    itemBuilder: ((context, index) {
+                      return BookListDesign(
+                          bookDetail: bookProvider.likedBookList[index],
+                          size: size);
+                    }),
+                    shrinkWrap: true,
+                    itemCount: bookProvider.likedBookList.length,
+                  );
           }))
         ]),
       ),
